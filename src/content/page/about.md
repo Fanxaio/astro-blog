@@ -1,6 +1,6 @@
 ---
 slug: about
-title: About
+title: 关于我
 ---
 
 > ✨ 你可以通过下面这些便捷方式探索我的文字世界：  
