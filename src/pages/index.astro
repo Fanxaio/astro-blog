@@ -1,10 +1,7 @@
 ---
-import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
-import BaseHead from '../components/BaseHead.astro';
+import Base from '../layouts/Base.astro';
 import HeaderLink from '../components/HeaderLink.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
@@ -18,41 +15,31 @@ const recentPosts = allPosts
 	.slice(0, 10);
 ---
 
-<!doctype html>
-<html lang="zh-CN">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<p></p>
-			<div class="post-content content">
-				<IndexContent />
-			</div>
-			
-			<h3>最近文章</h3>
-			<p></p>
-			<ul class="posts">
-				{
-					recentPosts.map((post) => (
-						<li>
-							<span>
-								<FormattedDate date={post.data.pubDate} />
-							</span>
-							<div>
-								<a href={`/blog/${post.id}.html`}>
-									{post.data.title}
-								</a>
-							</div>
-						</li>
-					))
-				}
-			</ul>
-			<p>
-				<HeaderLink href="/blog">查看全部</HeaderLink>
-			</p>
-		</main>
-		<Footer />
-	</body>
-</html>
+<Base title={SITE_TITLE} description={SITE_DESCRIPTION}>
+	<p></p>
+	<div class="post-content content">
+		<IndexContent />
+	</div>
+	
+	<h3>最近文章</h3>
+	<p></p>
+	<ul class="posts">
+		{
+			recentPosts.map((post) => (
+				<li>
+					<span>
+						<FormattedDate date={post.data.pubDate} />
+					</span>
+					<div>
+						<a href={`/blog/${post.id}.html`} transition:name={`post-title-${post.id}`}>
+							{post.data.title}
+						</a>
+					</div>
+				</li>
+			))
+		}
+	</ul>
+	<p>
+		<HeaderLink href="/blog">查看全部</HeaderLink>
+	</p>
+</Base>
