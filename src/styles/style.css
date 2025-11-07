@@ -373,9 +373,18 @@ footer {
   padding: 20px 0
 }
 
-.title:hover {
+.title a:hover {
   text-decoration: none;
   border: none
+}
+
+.title {
+  /* text-align: center; */
+}
+
+.title img {
+  max-width: 300px;
+  user-select: none;
 }
 
 .title h1,
