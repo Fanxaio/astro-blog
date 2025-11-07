@@ -34,10 +34,7 @@ const embedUrl = `https://zishu.me${currentPath}`;
 <script
   is:inline
   src="https://s4.zstatic.net/npm/twikoo@1.6.44/dist/twikoo.nocss.js"></script>
-<link
-  rel="stylesheet"
-  href="https://s4.zstatic.net/npm/twikoo@1.6.44/dist/twikoo.css"
-/>
+<link rel="stylesheet" href="/twikoo.css" />
 
 <script is:inline define:vars={{ embedUrl }}>
   // 防止重复初始化的标志
@@ -70,15 +67,19 @@ const embedUrl = `https://zishu.me${currentPath}`;
     }
 
     // 移除所有旧的 Discourse 脚本
-    document.querySelectorAll('script[src*="linux.do/javascripts/embed.js"]').forEach(script => {
-      script.remove();
-    });
+    document
+      .querySelectorAll('script[src*="linux.do/javascripts/embed.js"]')
+      .forEach((script) => {
+        script.remove();
+      });
 
     // 清理 Discourse 的全局状态
     if (window.DiscourseEmbed) {
       // 如果有 iframe，先移除
-      const discourseIframes = document.querySelectorAll('iframe[id^="discourse-embed-frame"]');
-      discourseIframes.forEach(iframe => {
+      const discourseIframes = document.querySelectorAll(
+        'iframe[id^="discourse-embed-frame"]'
+      );
+      discourseIframes.forEach((iframe) => {
         iframe.remove();
       });
 
@@ -88,8 +89,8 @@ const embedUrl = `https://zishu.me${currentPath}`;
 
     // 移除可能存在的其他 Discourse 相关元素
     const discourseContainers = document.querySelectorAll('[id^="discourse-"]');
-    discourseContainers.forEach(container => {
-      if (container.id !== 'discourse-comments') {
+    discourseContainers.forEach((container) => {
+      if (container.id !== "discourse-comments") {
         container.remove();
       }
     });
@@ -123,7 +124,7 @@ const embedUrl = `https://zishu.me${currentPath}`;
           discourseLoaded = true;
         };
         d.onerror = () => {
-          console.error('Failed to load Discourse embed script');
+          console.error("Failed to load Discourse embed script");
           discourseLoaded = false;
         };
         document.body.appendChild(d);
@@ -137,8 +138,8 @@ const embedUrl = `https://zishu.me${currentPath}`;
     if (!giscusEl) return;
 
     // 查找现有的 giscus iframe
-    const iframe = giscusEl.querySelector('iframe.giscus-frame');
-    
+    const iframe = giscusEl.querySelector("iframe.giscus-frame");
+
     if (iframe) {
       // 如果存在，通过 postMessage 更新配置
       iframe.contentWindow.postMessage(
@@ -146,16 +147,16 @@ const embedUrl = `https://zishu.me${currentPath}`;
           giscus: {
             setConfig: {
               term: window.location.pathname,
-              strict: '1',
-            }
-          }
+              strict: "1",
+            },
+          },
         },
-        'https://giscus.app'
+        "https://giscus.app"
       );
     } else {
       // 如果不存在，创建新的 giscus 脚本
       giscusEl.innerHTML = "";
-      
+
       const script = document.createElement("script");
       script.src = "https://giscus.app/client.js";
       script.setAttribute("data-repo", "anghunk/hugo-blog");
@@ -172,7 +173,7 @@ const embedUrl = `https://zishu.me${currentPath}`;
       script.setAttribute("data-loading", "lazy");
       script.crossOrigin = "anonymous";
       script.async = true;
-      
+
       giscusEl.appendChild(script);
     }
   }
