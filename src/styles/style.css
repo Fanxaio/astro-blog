@@ -516,3 +516,14 @@ ul.posts li a:visited {
   animation: 420ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
     300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
 }
+
+.blog-layout {
+  position: relative;
+}
+
+.blog-sidebar {
+  width: 280px;
+  position: fixed;
+  right: 20px;
+  top: 0;
+}

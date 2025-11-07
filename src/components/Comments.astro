@@ -11,81 +11,274 @@ const currentPath = Astro.url.pathname;
 const embedUrl = `https://zishu.me${currentPath}`;
 ---
 
-<hr class="sep">
+<hr class="sep" />
 <ul class="comment-tabs">
   {showLinuxDo && <li>LinuxDo</li>}
   <li>Giscus</li>
   <li>Twikoo</li>
 </ul>
 <div class="comments">
-  {showLinuxDo && (
-    <div>
-      <div id='discourse-comments'></div>
-      <meta name='discourse-username' content='anghunk'>
-      <script type="text/javascript" is:inline define:vars={{ embedUrl }}>
-        DiscourseEmbed = {
-          discourseUrl: 'https://linux.do/',
-          discourseEmbedUrl: embedUrl,
-        };
-
-        (function() {
-          var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
-          d.src = DiscourseEmbed.discourseUrl + 'javascripts/embed.js';
-          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
-        })();
-      </script>
-    </div>
-  )}
+  {
+    showLinuxDo && (
+      <div>
+        <div id="discourse-comments" />
+        <meta name="discourse-username" content="anghunk" />
+      </div>
+    )
+  }
   <div class="giscus"></div>
   <div>
     <div id="twikoo"></div>
   </div>
 </div>
-<script is:inline src="https://giscus.app/client.js"
-  data-repo="anghunk/hugo-blog"
-  data-repo-id="R_kgDOJkJvtw"
-  data-category="Announcements"
-  data-category-id="DIC_kwDOJkJvt84CX9d6"
-  data-mapping="pathname"
-  data-strict="1"
-  data-reactions-enabled="1"
-  data-emit-metadata="1"
-  data-input-position="top"
-  data-theme="light"
-  data-lang="zh-CN"
-  data-loading="lazy"
-  crossorigin="anonymous"
-  async>
-</script>
+<script
+  is:inline
+  src="https://s4.zstatic.net/npm/twikoo@1.6.44/dist/twikoo.nocss.js"></script>
+<link
+  rel="stylesheet"
+  href="https://s4.zstatic.net/npm/twikoo@1.6.44/dist/twikoo.css"
+/>
 
-<script is:inline src="https://s4.zstatic.net/npm/twikoo@1.6.44/dist/twikoo.min.js"></script>
-<script is:inline>
-twikoo.init({
-  envId: 'https://twikoo.zishu.me/.netlify/functions/twikoo',
-  el: '#twikoo',
-  lang: 'zh-CN', 
-})
+<script is:inline define:vars={{ embedUrl }}>
+  // 防止重复初始化的标志
+  let isInitializing = false;
+  let discourseLoaded = false;
+
+  // 初始化 Twikoo
+  function initTwikoo() {
+    if (typeof twikoo !== "undefined") {
+      const twikooEl = document.getElementById("twikoo");
+      if (twikooEl) {
+        // 清空旧内容
+        twikooEl.innerHTML = "";
+        // 重新初始化
+        twikoo.init({
+          envId: "https://twikoo.zishu.me/.netlify/functions/twikoo",
+          el: "#twikoo",
+          lang: "zh-CN",
+        });
+      }
+    }
+  }
+
+  // 清理 Discourse
+  function cleanupDiscourse() {
+    const discourseEl = document.getElementById("discourse-comments");
+    if (discourseEl) {
+      // 清空内容
+      discourseEl.innerHTML = "";
+    }
+
+    // 移除所有旧的 Discourse 脚本
+    document.querySelectorAll('script[src*="linux.do/javascripts/embed.js"]').forEach(script => {
+      script.remove();
+    });
+
+    // 清理 Discourse 的全局状态
+    if (window.DiscourseEmbed) {
+      // 如果有 iframe，先移除
+      const discourseIframes = document.querySelectorAll('iframe[id^="discourse-embed-frame"]');
+      discourseIframes.forEach(iframe => {
+        iframe.remove();
+      });
+
+      // 重置 DiscourseEmbed 对象
+      delete window.DiscourseEmbed;
+    }
+
+    // 移除可能存在的其他 Discourse 相关元素
+    const discourseContainers = document.querySelectorAll('[id^="discourse-"]');
+    discourseContainers.forEach(container => {
+      if (container.id !== 'discourse-comments') {
+        container.remove();
+      }
+    });
+  }
+
+  // 初始化 LinuxDo (Discourse)
+  function initDiscourse() {
+    const discourseEl = document.getElementById("discourse-comments");
+    if (!discourseEl) return;
+
+    // 先彻底清理旧实例
+    cleanupDiscourse();
+
+    // 重置加载状态
+    discourseLoaded = false;
+
+    // 设置新的 DiscourseEmbed 配置
+    window.DiscourseEmbed = {
+      discourseUrl: "https://linux.do/",
+      discourseEmbedUrl: embedUrl,
+    };
+
+    // 延迟加载脚本，确保清理完成
+    setTimeout(() => {
+      if (!discourseLoaded && window.DiscourseEmbed) {
+        const d = document.createElement("script");
+        d.type = "text/javascript";
+        d.async = true;
+        d.src = window.DiscourseEmbed.discourseUrl + "javascripts/embed.js";
+        d.onload = () => {
+          discourseLoaded = true;
+        };
+        d.onerror = () => {
+          console.error('Failed to load Discourse embed script');
+          discourseLoaded = false;
+        };
+        document.body.appendChild(d);
+      }
+    }, 300);
+  }
+
+  // 重新初始化 Giscus
+  function initGiscus() {
+    const giscusEl = document.querySelector(".giscus");
+    if (!giscusEl) return;
+
+    // 查找现有的 giscus iframe
+    const iframe = giscusEl.querySelector('iframe.giscus-frame');
+    
+    if (iframe) {
+      // 如果存在，通过 postMessage 更新配置
+      iframe.contentWindow.postMessage(
+        {
+          giscus: {
+            setConfig: {
+              term: window.location.pathname,
+              strict: '1',
+            }
+          }
+        },
+        'https://giscus.app'
+      );
+    } else {
+      // 如果不存在，创建新的 giscus 脚本
+      giscusEl.innerHTML = "";
+      
+      const script = document.createElement("script");
+      script.src = "https://giscus.app/client.js";
+      script.setAttribute("data-repo", "anghunk/hugo-blog");
+      script.setAttribute("data-repo-id", "R_kgDOJkJvtw");
+      script.setAttribute("data-category", "Announcements");
+      script.setAttribute("data-category-id", "DIC_kwDOJkJvt84CX9d6");
+      script.setAttribute("data-mapping", "pathname");
+      script.setAttribute("data-strict", "1");
+      script.setAttribute("data-reactions-enabled", "1");
+      script.setAttribute("data-emit-metadata", "1");
+      script.setAttribute("data-input-position", "top");
+      script.setAttribute("data-theme", "light");
+      script.setAttribute("data-lang", "zh-CN");
+      script.setAttribute("data-loading", "lazy");
+      script.crossOrigin = "anonymous";
+      script.async = true;
+      
+      giscusEl.appendChild(script);
+    }
+  }
+
+  // 统一初始化函数
+  function initComments() {
+    // 防止重复初始化
+    if (isInitializing) return;
+    isInitializing = true;
+
+    // 延迟初始化，确保 DOM 完全加载
+    setTimeout(() => {
+      initDiscourse();
+      initGiscus();
+      initTwikoo();
+      isInitializing = false;
+    }, 100);
+  }
+
+  // 首次加载时初始化
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initComments);
+  } else {
+    initComments();
+  }
+
+  // View Transitions 页面切换后重新初始化
+  // astro:page-load 只在 View Transitions 导航时触发，不会在首次加载时触发
+  document.addEventListener("astro:page-load", initComments);
+
+  // 页面切换前清理
+  document.addEventListener("astro:before-preparation", function () {
+    // 重置标志
+    isInitializing = false;
+    discourseLoaded = false;
+
+    // 彻底清理 Discourse
+    cleanupDiscourse();
+
+    // 清理 Twikoo
+    const twikooEl = document.getElementById("twikoo");
+    if (twikooEl) {
+      twikooEl.innerHTML = "";
+    }
+
+    // Giscus 不需要清理，通过 postMessage 更新
+  });
 </script>
 
 <script>
-document.querySelectorAll('.comment-tabs li').forEach((tab, index) => {
-  if (index === 0) {
-    document.querySelectorAll('.comment-tabs li')[0].classList.add('active');
-    document.querySelectorAll('.comments > div')[0].classList.add('active');
+  // 初始化评论标签切换
+  function initCommentTabs() {
+    const tabs = document.querySelectorAll(".comment-tabs li");
+    const contents = document.querySelectorAll(".comments > div");
+
+    if (tabs.length === 0 || contents.length === 0) return;
+
+    // 移除旧的事件监听器（通过克隆节点）
+    tabs.forEach((tab, index) => {
+      const newTab = tab.cloneNode(true);
+      if (tab.parentNode) {
+        tab.parentNode.replaceChild(newTab, tab);
+      }
+    });
+
+    // 重新获取新的节点
+    const newTabs = document.querySelectorAll(".comment-tabs li");
+    const newContents = document.querySelectorAll(".comments > div");
+
+    // 设置默认激活第一个标签
+    if (newTabs[0]) {
+      newTabs[0].classList.add("active");
+    }
+    if (newContents[0]) {
+      newContents[0].classList.add("active");
+    }
+
+    // 添加点击事件
+    newTabs.forEach((tab, index) => {
+      tab.addEventListener("click", () => {
+        // 移除所有激活状态
+        newTabs.forEach((sibling) => {
+          sibling.classList.remove("active");
+        });
+        tab.classList.add("active");
+
+        // 切换内容显示
+        newContents.forEach((content) => {
+          content.classList.remove("active");
+        });
+        if (newContents[index]) {
+          newContents[index].classList.add("active");
+        }
+      });
+    });
   }
-  
-  tab.addEventListener('click', function() {
-    document.querySelectorAll('.comment-tabs li').forEach(sibling => {
-      sibling.classList.remove('active');
-    });
-    this.classList.add('active');
-    
-    document.querySelectorAll('.comments > div').forEach(content => {
-      content.classList.remove('active');
-    });
-    document.querySelectorAll('.comments > div')[index].classList.add('active');
-  });
-});
+
+  // 首次加载时初始化
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initCommentTabs);
+  } else {
+    initCommentTabs();
+  }
+
+  // View Transitions 页面切换后重新初始化
+  document.addEventListener("astro:page-load", initCommentTabs);
 </script>
 
 <style>
