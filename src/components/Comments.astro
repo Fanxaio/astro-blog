@@ -12,6 +12,9 @@ const embedUrl = `https://zishu.me${currentPath}`;
 ---
 
 <hr class="sep" />
+<p></p>
+<h2>–</h2>
+<h3>评论</h3>
 <ul class="comment-tabs">
   {showLinuxDo && <li>LinuxDo</li>}
   <li>Twikoo</li>
@@ -43,16 +46,16 @@ const embedUrl = `https://zishu.me${currentPath}`;
 
   // 初始化 Twikoo
   function initTwikoo() {
-    if (typeof twikoo !== "undefined") {
-      const twikooEl = document.getElementById("twikoo");
+    if (typeof twikoo !== 'undefined') {
+      const twikooEl = document.getElementById('twikoo');
       if (twikooEl) {
         // 清空旧内容
-        twikooEl.innerHTML = "";
+        twikooEl.innerHTML = '';
         // 重新初始化
         twikoo.init({
-          envId: "https://twikoo.zishu.me/.netlify/functions/twikoo",
-          el: "#twikoo",
-          lang: "zh-CN",
+          envId: 'https://twikoo.zishu.me/.netlify/functions/twikoo',
+          el: '#twikoo',
+          lang: 'zh-CN'
         });
       }
     }
@@ -60,10 +63,10 @@ const embedUrl = `https://zishu.me${currentPath}`;
 
   // 清理 Discourse
   function cleanupDiscourse() {
-    const discourseEl = document.getElementById("discourse-comments");
+    const discourseEl = document.getElementById('discourse-comments');
     if (discourseEl) {
       // 清空内容
-      discourseEl.innerHTML = "";
+      discourseEl.innerHTML = '';
     }
 
     // 移除所有旧的 Discourse 脚本
@@ -90,7 +93,7 @@ const embedUrl = `https://zishu.me${currentPath}`;
     // 移除可能存在的其他 Discourse 相关元素
     const discourseContainers = document.querySelectorAll('[id^="discourse-"]');
     discourseContainers.forEach((container) => {
-      if (container.id !== "discourse-comments") {
+      if (container.id !== 'discourse-comments') {
         container.remove();
       }
     });
@@ -98,7 +101,7 @@ const embedUrl = `https://zishu.me${currentPath}`;
 
   // 初始化 LinuxDo (Discourse)
   function initDiscourse() {
-    const discourseEl = document.getElementById("discourse-comments");
+    const discourseEl = document.getElementById('discourse-comments');
     if (!discourseEl) return;
 
     // 先彻底清理旧实例
@@ -109,22 +112,22 @@ const embedUrl = `https://zishu.me${currentPath}`;
 
     // 设置新的 DiscourseEmbed 配置
     window.DiscourseEmbed = {
-      discourseUrl: "https://linux.do/",
-      discourseEmbedUrl: embedUrl,
+      discourseUrl: 'https://linux.do/',
+      discourseEmbedUrl: embedUrl
     };
 
     // 延迟加载脚本，确保清理完成
     setTimeout(() => {
       if (!discourseLoaded && window.DiscourseEmbed) {
-        const d = document.createElement("script");
-        d.type = "text/javascript";
+        const d = document.createElement('script');
+        d.type = 'text/javascript';
         d.async = true;
-        d.src = window.DiscourseEmbed.discourseUrl + "javascripts/embed.js";
+        d.src = window.DiscourseEmbed.discourseUrl + 'javascripts/embed.js';
         d.onload = () => {
           discourseLoaded = true;
         };
         d.onerror = () => {
-          console.error("Failed to load Discourse embed script");
+          console.error('Failed to load Discourse embed script');
           discourseLoaded = false;
         };
         document.body.appendChild(d);
@@ -134,11 +137,11 @@ const embedUrl = `https://zishu.me${currentPath}`;
 
   // 重新初始化 Giscus
   function initGiscus() {
-    const giscusEl = document.querySelector(".giscus");
+    const giscusEl = document.querySelector('.giscus');
     if (!giscusEl) return;
 
     // 查找现有的 giscus iframe
-    const iframe = giscusEl.querySelector("iframe.giscus-frame");
+    const iframe = giscusEl.querySelector('iframe.giscus-frame');
 
     if (iframe) {
       // 如果存在，通过 postMessage 更新配置
@@ -147,31 +150,31 @@ const embedUrl = `https://zishu.me${currentPath}`;
           giscus: {
             setConfig: {
               term: window.location.pathname,
-              strict: "1",
-            },
-          },
+              strict: '1'
+            }
+          }
         },
-        "https://giscus.app"
+        'https://giscus.app'
       );
     } else {
       // 如果不存在，创建新的 giscus 脚本
-      giscusEl.innerHTML = "";
+      giscusEl.innerHTML = '';
 
-      const script = document.createElement("script");
-      script.src = "https://giscus.app/client.js";
-      script.setAttribute("data-repo", "anghunk/hugo-blog");
-      script.setAttribute("data-repo-id", "R_kgDOJkJvtw");
-      script.setAttribute("data-category", "Announcements");
-      script.setAttribute("data-category-id", "DIC_kwDOJkJvt84CX9d6");
-      script.setAttribute("data-mapping", "pathname");
-      script.setAttribute("data-strict", "1");
-      script.setAttribute("data-reactions-enabled", "1");
-      script.setAttribute("data-emit-metadata", "1");
-      script.setAttribute("data-input-position", "top");
-      script.setAttribute("data-theme", "light");
-      script.setAttribute("data-lang", "zh-CN");
-      script.setAttribute("data-loading", "lazy");
-      script.crossOrigin = "anonymous";
+      const script = document.createElement('script');
+      script.src = 'https://giscus.app/client.js';
+      script.setAttribute('data-repo', 'anghunk/hugo-blog');
+      script.setAttribute('data-repo-id', 'R_kgDOJkJvtw');
+      script.setAttribute('data-category', 'Announcements');
+      script.setAttribute('data-category-id', 'DIC_kwDOJkJvt84CX9d6');
+      script.setAttribute('data-mapping', 'pathname');
+      script.setAttribute('data-strict', '1');
+      script.setAttribute('data-reactions-enabled', '1');
+      script.setAttribute('data-emit-metadata', '1');
+      script.setAttribute('data-input-position', 'top');
+      script.setAttribute('data-theme', 'light');
+      script.setAttribute('data-lang', 'zh-CN');
+      script.setAttribute('data-loading', 'lazy');
+      script.crossOrigin = 'anonymous';
       script.async = true;
 
       giscusEl.appendChild(script);
@@ -194,18 +197,18 @@ const embedUrl = `https://zishu.me${currentPath}`;
   }
 
   // 首次加载时初始化
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initComments);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initComments);
   } else {
     initComments();
   }
 
   // View Transitions 页面切换后重新初始化
   // astro:page-load 只在 View Transitions 导航时触发，不会在首次加载时触发
-  document.addEventListener("astro:page-load", initComments);
+  document.addEventListener('astro:page-load', initComments);
 
   // 页面切换前清理
-  document.addEventListener("astro:before-preparation", function () {
+  document.addEventListener('astro:before-preparation', function () {
     // 重置标志
     isInitializing = false;
     discourseLoaded = false;
@@ -214,9 +217,9 @@ const embedUrl = `https://zishu.me${currentPath}`;
     cleanupDiscourse();
 
     // 清理 Twikoo
-    const twikooEl = document.getElementById("twikoo");
+    const twikooEl = document.getElementById('twikoo');
     if (twikooEl) {
-      twikooEl.innerHTML = "";
+      twikooEl.innerHTML = '';
     }
 
     // Giscus 不需要清理，通过 postMessage 更新
@@ -226,8 +229,8 @@ const embedUrl = `https://zishu.me${currentPath}`;
 <script>
   // 初始化评论标签切换
   function initCommentTabs() {
-    const tabs = document.querySelectorAll(".comment-tabs li");
-    const contents = document.querySelectorAll(".comments > div");
+    const tabs = document.querySelectorAll('.comment-tabs li');
+    const contents = document.querySelectorAll('.comments > div');
 
     if (tabs.length === 0 || contents.length === 0) return;
 
@@ -240,64 +243,85 @@ const embedUrl = `https://zishu.me${currentPath}`;
     });
 
     // 重新获取新的节点
-    const newTabs = document.querySelectorAll(".comment-tabs li");
-    const newContents = document.querySelectorAll(".comments > div");
+    const newTabs = document.querySelectorAll('.comment-tabs li');
+    const newContents = document.querySelectorAll('.comments > div');
 
     // 设置默认激活第一个标签
     if (newTabs[0]) {
-      newTabs[0].classList.add("active");
+      newTabs[0].classList.add('active');
     }
     if (newContents[0]) {
-      newContents[0].classList.add("active");
+      newContents[0].classList.add('active');
     }
 
     // 添加点击事件
     newTabs.forEach((tab, index) => {
-      tab.addEventListener("click", () => {
+      tab.addEventListener('click', () => {
         // 移除所有激活状态
         newTabs.forEach((sibling) => {
-          sibling.classList.remove("active");
+          sibling.classList.remove('active');
         });
-        tab.classList.add("active");
+        tab.classList.add('active');
 
         // 切换内容显示
         newContents.forEach((content) => {
-          content.classList.remove("active");
+          content.classList.remove('active');
         });
         if (newContents[index]) {
-          newContents[index].classList.add("active");
+          newContents[index].classList.add('active');
         }
       });
     });
   }
 
   // 首次加载时初始化
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initCommentTabs);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCommentTabs);
   } else {
     initCommentTabs();
   }
 
   // View Transitions 页面切换后重新初始化
-  document.addEventListener("astro:page-load", initCommentTabs);
+  document.addEventListener('astro:page-load', initCommentTabs);
 </script>
 
 <style>
   .comment-tabs {
     display: flex;
-    margin-top: 3em;
+    padding: 0;
   }
   .comment-tabs li {
-    margin-right: 40px;
+    margin-right: 2em;
     cursor: pointer;
+    text-align: center;
+    position: relative;
+    padding: 0.4em 1.4em;
+    background: white;
+    border: 2px solid transparent;
+    border-color: rgba(var(--accent), 0.3);
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
   }
   .comment-tabs li.active {
-    text-decoration: underline;
+    background: #333;
+    color: #fff;
   }
   .comments > div.active {
     display: block;
   }
   .comments > div {
     display: none;
+  }
+
+  @media (max-width: 600px) {
+    .comment-tabs {
+      justify-content: space-between;
+    }
+    .comment-tabs li {
+      margin: 0;
+      width: 30%;
+      padding: 0.8em 1.4em;
+    }
   }
 </style>

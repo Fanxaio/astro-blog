@@ -26,6 +26,10 @@
   }
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: "MiSans";
   font-size: var(--font-scale);
@@ -48,6 +52,10 @@ body {
 
   position: relative;
   z-index: 1;
+}
+
+::selection {
+  background-color: #eceadf;
 }
 
 html {
@@ -152,10 +160,6 @@ a {
   cursor: pointer;
   text-decoration: none;
   border-bottom: 1px solid transparent;
-
-  -webkit-tap-highlight-color: transparent;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
 }
 
 a:hover,
@@ -512,4 +516,12 @@ ul.posts li a:visited {
     margin: 0 15px 15px 0;
     display: inline-flex;
   }
+}
+
+#discourse-comments iframe {
+  border: 1px solid #d0d7de;
+  background: #fff;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-radius: 10px;
 }
