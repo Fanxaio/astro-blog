@@ -8,9 +8,7 @@ const { backUrl = '/blog', showBackToTop = true } = Astro.props;
 ---
 
 <div class='nav-buttons-group'>
-	<a
-		href={backUrl}
-		class='nav-button nav-back'>
+	<a href={backUrl} class='nav-button nav-back'>
 		<svg
 			xmlns='http://www.w3.org/2000/svg'
 			width='24'
@@ -30,9 +28,7 @@ const { backUrl = '/blog', showBackToTop = true } = Astro.props;
 
 	{
 		showBackToTop && (
-			<button
-				class='nav-button nav-top'
-				id='backToTop'>
+			<button class='nav-button nav-top' id='backToTop'>
 				<svg
 					xmlns='http://www.w3.org/2000/svg'
 					width='24'

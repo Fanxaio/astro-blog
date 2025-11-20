@@ -66,9 +66,7 @@ function formatDate(dateString: string): string {
 }
 ---
 
-<Base
-	title={title}
-	description={title}>
+<Base title={title} description={title}>
 	<p></p>
 	<h2>–</h2>
 	<h1>{title}</h1>
@@ -88,10 +86,7 @@ function formatDate(dateString: string): string {
 								<div class='meta'>
 									<span class='date'>{formatDate(comment.created_at)}</span>
 								</div>
-								<div
-									class='body'
-									set:html={marked.parse(comment.body)}
-								/>
+								<div class='body' set:html={marked.parse(comment.body)} />
 							</li>
 						))
 					)

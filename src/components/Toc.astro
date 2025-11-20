@@ -8,14 +8,9 @@ interface Props {
 const { minLevel = 2, maxLevel = 3, title = '目录' } = Astro.props;
 ---
 
-<aside
-	class='toc-container'
-	data-has-content='false'>
+<aside class='toc-container' data-has-content='false'>
 	<div class='toc-header'>{title}</div>
-	<nav
-		class='toc'
-		data-min-level={minLevel}
-		data-max-level={maxLevel}>
+	<nav class='toc' data-min-level={minLevel} data-max-level={maxLevel}>
 		<!-- 目录将通过 JavaScript 动态生成 -->
 	</nav>
 </aside>
@@ -156,7 +151,7 @@ const { minLevel = 2, maxLevel = 3, title = '目录' } = Astro.props;
 				{
 					rootMargin: '-20% 0px -35% 0px',
 					threshold: 0,
-				}
+				},
 			);
 
 			headings.forEach((heading) => {

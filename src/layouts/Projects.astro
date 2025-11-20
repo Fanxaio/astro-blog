@@ -29,9 +29,7 @@ const completedBoxes = projects.length;
 const defaultImage = 'https://imgurl.zishu.me/2025/07/1752828174580.webp';
 ---
 
-<Base
-	title={title}
-	description={title}>
+<Base title={title} description={title}>
 	<p></p>
 	<h2>–</h2>
 	<h1>{title}</h1>
@@ -62,23 +60,12 @@ const defaultImage = 'https://imgurl.zishu.me/2025/07/1752828174580.webp';
 				) : (
 					projects.map((project) => (
 						<div class='card'>
-							<a
-								href={project.url || '#'}
-								class='card-image'
-								target='_blank'
-								rel='noopener noreferrer'>
-								<img
-									src={project.image || defaultImage}
-									alt={project.name}
-									loading='lazy'
-								/>
+							<a href={project.url || '#'} class='card-image' target='_blank' rel='noopener noreferrer'>
+								<img src={project.image || defaultImage} alt={project.name} loading='lazy' />
 							</a>
 							<div class='card-content'>
 								<h2 class='card-title'>
-									<a
-										href={project.url || '#'}
-										target='_blank'
-										rel='noopener noreferrer'>
+									<a href={project.url || '#'} target='_blank' rel='noopener noreferrer'>
 										{project.name || '未命名项目'}
 									</a>
 								</h2>

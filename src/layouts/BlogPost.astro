@@ -3,8 +3,8 @@ import type { CollectionEntry } from 'astro:content';
 import Base from './Base.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Comments from '../components/Comments.astro';
-import TableOfContents from '../components/TableOfContents.astro';
-import NavigationButtons from '../components/NavigationButtons.astro';
+import Toc from '../components/Toc.astro';
+import NavButton from '../components/NavButton.astro';
 
 type Props = CollectionEntry<'blog'>['data'] & {
 	postId?: string;
@@ -28,15 +28,9 @@ const {
 } = Astro.props;
 ---
 
-<Base
-	title={title}
-	description={description || ''}>
+<Base title={title} description={description || ''}>
 	<!-- LightGallery CSS (本地) -->
-	<link
-		rel='stylesheet'
-		href='/lightgallery/css/lightgallery.min.css'
-		slot='head'
-	/>
+	<link rel='stylesheet' href='/lightgallery/css/lightgallery.min.css' slot='head' />
 
 	<p></p>
 	<h2>–</h2>
@@ -49,9 +43,7 @@ const {
 					分类：
 					{categories.map((category, index) => (
 						<>
-							<a
-								href={`/categories/${category}/`}
-								class='tag'>
+							<a href={`/categories/${category}/`} class='tag'>
 								{category}
 							</a>
 							{index < categories.length - 1 && '，'}
@@ -67,9 +59,7 @@ const {
 					标签：
 					{tags.map((tag, index) => (
 						<>
-							<a
-								href={`/tags/${tag}/`}
-								class='tag'>
+							<a href={`/tags/${tag}/`} class='tag'>
 								{tag}
 							</a>
 							{index < tags.length - 1 && '，'}
@@ -85,37 +75,25 @@ const {
 		{
 			showTOC && (
 				<div class='blog-sidebar'>
-					<TableOfContents
-						minLevel={tocMinLevel}
-						maxLevel={tocMaxLevel}
-						title='目录'
-					/>
+					<Toc minLevel={tocMinLevel} maxLevel={tocMaxLevel} title='目录' />
 				</div>
 			)
 		}
 
 		<!-- 主内容区 -->
-		<div
-			class='post-content content'
-			id='lightgallery'>
+		<div class='post-content content' id='lightgallery'>
 			<hr />
 			<slot />
 		</div>
 
 		<!-- 导航按钮 -->
-		<NavigationButtons
-			backUrl='/blog'
-			showBackToTop={true}
-		/>
+		<NavButton backUrl='/blog' showBackToTop={true} />
 
 		<Comments showLinuxDo={true} />
 	</div>
 
 	<!-- LightGallery JS (本地) -->
-	<script
-		is:inline
-		src='/lightgallery/js/lightgallery.min.js'
-	></script>
+	<script is:inline src='/lightgallery/js/lightgallery.min.js'></script>
 
 	<!-- 初始化 LightGallery -->
 	<script is:inline>

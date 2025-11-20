@@ -42,9 +42,7 @@ const { posts, tag } = Astro.props;
 						<FormattedDate date={post.data.pubDate} />
 					</span>
 					<div>
-						<a
-							href={`/blog/${post.id}.html`}
-							transition:name={`post-title-${post.id}`}>
+						<a href={`/blog/${post.id}.html`} transition:name={`post-title-${post.id}`}>
 							{post.data.title}
 						</a>
 					</div>

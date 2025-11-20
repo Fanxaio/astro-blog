@@ -13,15 +13,13 @@ const allPosts = await getCollection('blog');
 const recentPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()).slice(0, 10);
 ---
 
-<Base
-	title={SITE_TITLE}
-	description={SITE_DESCRIPTION}>
+<Base title={SITE_TITLE} description={SITE_DESCRIPTION}>
 	<p></p>
 	<div class='post-content content'>
 		<IndexContent />
 	</div>
 
-	<div class="indextitle">最近文章</div>
+	<div class='indextitle'>最近文章</div>
 	<p></p>
 	<ul class='posts'>
 		{
@@ -31,9 +29,7 @@ const recentPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pu
 						<FormattedDate date={post.data.pubDate} />
 					</span>
 					<div>
-						<a
-							href={`/blog/${post.id}.html`}
-							transition:name={`post-title-${post.id}`}>
+						<a href={`/blog/${post.id}.html`} transition:name={`post-title-${post.id}`}>
 							{post.data.title}
 						</a>
 					</div>

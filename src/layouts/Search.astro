@@ -24,9 +24,7 @@ const searchData = posts.map((post) => ({
 }));
 ---
 
-<Base
-	title={title}
-	description='搜索博客文章'>
+<Base title={title} description='搜索博客文章'>
 	<p></p>
 	<h2>–</h2>
 	<h1>{title}</h1>
@@ -37,22 +35,12 @@ const searchData = posts.map((post) => ({
 	<!-- 搜索区域 -->
 	<div class='search-container'>
 		<div class='search-box'>
-			<input
-				type='text'
-				id='search-input'
-				placeholder='输入关键词搜索文章...'
-				autocomplete='off'
-			/>
+			<input type='text' id='search-input' placeholder='输入关键词搜索文章...' autocomplete='off' />
 		</div>
 
-		<div
-			id='search-stats'
-			class='search-stats'>
-		</div>
+		<div id='search-stats' class='search-stats'></div>
 
-		<div
-			id='search-results'
-			class='search-results'>
+		<div id='search-results' class='search-results'>
 			<!-- 搜索结果将在这里显示 -->
 		</div>
 	</div>

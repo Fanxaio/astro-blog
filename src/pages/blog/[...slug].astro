@@ -19,12 +19,6 @@ const { Content } = await render(post);
 const { showTOC, tocMinLevel, tocMaxLevel } = post.data as any;
 ---
 
-<BlogPost 
-	{...post.data} 
-	postId={post.id}
-	showTOC={showTOC}
-	tocMinLevel={tocMinLevel}
-	tocMaxLevel={tocMaxLevel}
->
+<BlogPost {...post.data} postId={post.id} showTOC={showTOC} tocMinLevel={tocMinLevel} tocMaxLevel={tocMaxLevel}>
 	<Content />
 </BlogPost>
