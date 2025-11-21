@@ -21,5 +21,4 @@
 
 - [Astro](https://astro.build/) - 现代化的 Web 框架
 - [Bear Blog](https://github.com/HermanMartinus/bearblog/) - 设计灵感
-- [Giscus](https://giscus.app/) - 评论系统
 - [Twikoo](https://twikoo.js.org/) - 评论系统

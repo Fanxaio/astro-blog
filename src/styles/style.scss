@@ -541,3 +541,8 @@ ul.posts li a:visited {
   color: var(--heading-color);
   font-weight: bold;
 }
+
+.contains-task-list {
+  list-style: none;
+  padding-left: 0 !important;
+}
