@@ -26,7 +26,7 @@ tags:
 
 前三者很好得到，暂不提，分类 ID 可以在之前部署 Giscus 看到，也就是 `data-category-id` 的值。
 
-![](https://imgurl.zishu.me/2025/10/1763689961720.webp)
+![](https://imgurl.zishu.me/2025/11/1763689961720.webp)
 
 **开始爬取**
 
