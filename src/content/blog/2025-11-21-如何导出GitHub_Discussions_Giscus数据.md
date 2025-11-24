@@ -19,10 +19,10 @@ tags:
 
 脚本放在最下方，我们先需要得到几个关键数据：
 
-- [ ] token（GITHUB_TOKEN）只需 `read:discussion` 权限
-- [ ] 用户名（REPO_OWNER） 
-- [ ] 仓库名（REPO_NAME）
-- [ ] Giscus 分类 ID（CATEGORY_ID）
+- token（GITHUB_TOKEN）只需 `read:discussion` 权限
+- 用户名（REPO_OWNER） 
+- 仓库名（REPO_NAME）
+- Giscus 分类 ID（CATEGORY_ID）
 
 前三者很好得到，暂不提，分类 ID 可以在之前部署 Giscus 看到，也就是 `data-category-id` 的值。
 
