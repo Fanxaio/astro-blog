@@ -1,4 +1,13 @@
 [
+   {
+    "name": "NoteLook",
+    "description": "一款强大的 vscode 笔记管理插件，支持收藏夹、最近文件和搜索功能。",
+    "url": "https://github.com/anghunk/vsc-notelook",
+    "image": "https://imgurl.zishu.me/2025/11/20251126115026575.webp",
+    "tags": [
+      "vscode 扩展"
+    ]
+  },
   {
     "name": "AquaBuddy - 喝水小助手 🐳",
     "description": "AquaBuddy 是一个可爱风格的浏览器扩展，帮助您记录每日饮水情况。通过简单直观的界面，让您轻松养成健康的饮水习惯。",
