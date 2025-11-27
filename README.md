@@ -27,4 +27,4 @@
 - [Bear Blog](https://github.com/HermanMartinus/bearblog/) - 设计灵感
 - [Twikoo](https://twikoo.js.org/) - 评论系统
 
-本仓库/博客基于 CC BY 4.0 协议开源。
+本仓库/博客基于 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hans) 协议开源。
