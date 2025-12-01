@@ -30,8 +30,13 @@
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: __matter_afb301;
+  src: url(./f5583b2ae7113d9d-s.p.woff2);
+}
+
 body {
-  font-family: "MiSans";
+  font-family: "MiSans", __matter_afb301;
   font-size: var(--font-scale);
   margin: auto;
   padding: 20px;
@@ -548,4 +553,22 @@ ul.posts li a:visited {
 .contains-task-list {
   list-style: none;
   padding-left: 0 !important;
+}
+
+/* 文本渐显动画 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fadeInUp {
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
 }

@@ -2,6 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import Base from './Base.astro';
 import Comments from '../components/Comments.astro';
+import FadeInAnimation from '../components/FadeInAnimation.astro';
 
 type Props = CollectionEntry<'page'>['data'] & {
 	content?: string;
@@ -20,4 +21,6 @@ const { title } = Astro.props;
 
 	<!-- 评论组件 -->
 	<Comments showLinuxDo={false} />
+
+	<FadeInAnimation />
 </Base>

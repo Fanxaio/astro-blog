@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import Base from './Base.astro';
+import FadeInAnimation from '../components/FadeInAnimation.astro';
 import projectsData from '../content/page/projects.json';
 
 type Props = CollectionEntry<'page'>['data'] & {
@@ -85,6 +86,8 @@ const defaultImage = 'https://imgurl.zishu.me/2025/07/1752828174580.webp';
 		</div>
 	</div>
 </Base>
+
+<FadeInAnimation includeCards={true} />
 
 <style>
 	.projects-container .projects-grid {

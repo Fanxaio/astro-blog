@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import Base from './Base.astro';
+import FadeInAnimation from '../components/FadeInAnimation.astro';
 
 type Props = CollectionEntry<'page'>['data'] & {
 	content?: string;
@@ -16,4 +17,6 @@ const { title } = Astro.props;
 	<div class='post-content content'>
 		<slot />
 	</div>
+
+	<FadeInAnimation />
 </Base>
