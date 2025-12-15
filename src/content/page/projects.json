@@ -1,5 +1,16 @@
 [
   {
+    "name": "Telegram Clipper - TG 剪藏",
+    "description": "将网页精彩内容一键收藏至 Telegram 频道，支持文字编辑、格式保留和网页快存。",
+    "url": "https://github.com/anghunk/telegram-clipper",
+    "image": "https://imgurl.zishu.me/2025/12/20251215133130402.webp",
+    "tags": [
+      "浏览器扩展",
+      "Telegram",
+      "剪藏内容"
+    ]
+  },
+  {
     "name": "屏幕水印工具",
     "description": "一个简单的小工具，可以在你的电脑屏幕上添加文字水印，非常适合录屏或在线分享时保护内容。",
     "url": "https://github.com/anghunk/watermark",
