@@ -11,6 +11,7 @@ type Props = CollectionEntry<'blog'>['data'] & {
 	showTOC?: boolean; // 是否显示目录，默认 true
 	tocMinLevel?: number; // 目录最小层级，默认 2 (h2)
 	tocMaxLevel?: number; // 目录最大层级，默认 3 (h3)
+	backUrl?: string; // 返回列表页地址
 };
 
 const {
@@ -25,6 +26,7 @@ const {
 	showTOC = true,
 	tocMinLevel = 2,
 	tocMaxLevel = 3,
+	backUrl = '/blog',
 } = Astro.props;
 ---
 
@@ -124,7 +126,7 @@ const {
 		</div>
 
 		<!-- 导航按钮 -->
-		<NavButton backUrl='/blog' showBackToTop={true} />
+		<NavButton backUrl={backUrl} showBackToTop={true} />
 
 		<Comments showLinuxDo={true} />
 	</div>

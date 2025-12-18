@@ -23,6 +23,7 @@ const blog = defineCollection({
 			heroImage: image().optional(),
 			categories: z.array(z.string()).optional(),
 			tags: z.array(z.string()).optional(),
+			draft: z.boolean().optional().default(false),
 		}),
 });
 
@@ -38,4 +39,30 @@ const page = defineCollection({
 	}),
 });
 
-export const collections = { blog, page };
+const weekly = defineCollection({
+	// Load Markdown and MDX files in the `src/content/weekly/` directory.
+	loader: glob({
+		base: './src/content/weekly',
+		pattern: '**/*.{md,mdx}',
+		generateId: ({ entry, data }) => {
+			// 确保 ID 始终是字符串
+			return String(data.slug || entry);
+		},
+	}),
+	// Type-check frontmatter using a schema
+	schema: ({ image }) =>
+		z.object({
+			slug: z.coerce.string().optional(), // 强制转换为字符串，支持数字输入
+			title: z.string(),
+			description: z.string().optional(),
+			// Transform string to Date object
+			pubDate: z.coerce.date(),
+			updatedDate: z.coerce.date().optional(),
+			heroImage: image().optional(),
+			categories: z.array(z.string()).optional(),
+			tags: z.array(z.string()).optional(),
+			draft: z.boolean().optional().default(false),
+		}),
+});
+
+export const collections = { blog, page, weekly };

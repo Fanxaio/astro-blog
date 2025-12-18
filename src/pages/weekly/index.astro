@@ -4,7 +4,7 @@ import Base from '../../layouts/Base.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import { SITE_DESCRIPTION } from '../../consts';
 
-const posts = (await getCollection('blog', ({ data }) => (import.meta.env.PROD ? !data.draft : true))).sort(
+const posts = (await getCollection('weekly', ({ data }) => (import.meta.env.PROD ? !data.draft : true))).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 
@@ -24,7 +24,7 @@ const years = Object.keys(postsByYear)
 	.sort((a, b) => b - a);
 ---
 
-<Base title='文章' description={SITE_DESCRIPTION}>
+<Base title='奇趣周刊' description={SITE_DESCRIPTION}>
 	<p></p>
 	<h2>–</h2>
 	<div class='posts-archive'>
@@ -39,7 +39,7 @@ const years = Object.keys(postsByYear)
 									<FormattedDate date={post.data.pubDate} />
 								</span>
 								<div>
-									<a href={`/blog/${post.id}.html`} transition:name={`post-title-${post.id}`}>
+									<a href={`/weekly/${post.id}.html`} transition:name={`post-title-${post.id}`}>
 										{post.data.title}
 									</a>
 								</div>
@@ -50,5 +50,4 @@ const years = Object.keys(postsByYear)
 			))
 		}
 	</div>
-
 </Base>

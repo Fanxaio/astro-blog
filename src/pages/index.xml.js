@@ -3,7 +3,7 @@ import rss from '@astrojs/rss';
 import { SITE_DESCRIPTION, SITE_TITLE, SITE_AUTHOR } from '../consts';
 
 export async function GET(context) {
-	const posts = await getCollection('blog');
+	const posts = await getCollection('blog', ({ data }) => (import.meta.env.PROD ? !data.draft : true));
 	posts.sort((a, b) => b.data.pubDate - a.data.pubDate);
 
 	return rss({
