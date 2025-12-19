@@ -1,6 +1,12 @@
 ---
+import { SITE_DAYS } from '../consts';
+
 const today = new Date();
 const currentYear = today.getFullYear();
+
+// 计算博客运行天数
+const startDate = new Date(SITE_DAYS);
+const runningDays = Math.floor((today.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
 ---
 
 <footer>
@@ -10,4 +16,5 @@ const currentYear = today.getFullYear();
 		|
 		<a href='https://github.com/anghunk' title='Github' target='_blank'>Github</a>
 	</span>
+	<p class='intro'>此博客已经运行了 {runningDays} 天.</p>
 </footer>
