@@ -1,5 +1,15 @@
 [
   {
+    "name": "IPFS Publisher",
+    "description": "一个简单的浏览器扩展，用于将 Markdown 文章发布到 IPFS 网络。",
+    "url": "https://github.com/anghunk/IPFS-Pubisher",
+    "image": "https://imgurl.zishu.me/2025/12/20251223094154571.webp",
+    "tags": [
+      "浏览器扩展",
+      "IPFS"
+    ]
+  },
+  {
     "name": "Clipper Hub - 万能剪藏",
     "description": "将网页内容一键收藏至多个平台的浏览器扩展，支持 Telegram、Discord、Notion 等多个平台，让你的灵感和收藏无处不在。",
     "url": "https://github.com/anghunk/clipper-hub",
