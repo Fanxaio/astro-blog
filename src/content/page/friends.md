@@ -15,7 +15,7 @@ title: 友链
 
 ```md
 名称：子舒的博客
-简介：想留下点什么，证明我来过，一个热爱生活的程序员。
+简介：想留下点什么，证明我来过。
 域名：https://zishu.me
 logo：https://zishu.me/favicon.ico
 ```

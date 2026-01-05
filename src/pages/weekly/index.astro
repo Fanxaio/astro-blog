@@ -5,7 +5,7 @@ import FormattedDate from '../../components/FormattedDate.astro';
 import { SITE_DESCRIPTION } from '../../consts';
 
 const posts = (await getCollection('weekly', ({ data }) => (import.meta.env.PROD ? !data.draft : true))).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
 // 按年份分组文章

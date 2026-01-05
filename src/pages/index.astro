@@ -10,9 +10,7 @@ import IndexContent from '../content/index.md';
 
 // 获取最新的博客文章（显示前10篇）
 const allPosts = await getCollection('blog', ({ data }) => (import.meta.env.PROD ? !data.draft : true));
-const recentPosts = allPosts
-	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-	.slice(0, 10);
+const recentPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()).slice(0, 10);
 ---
 
 <Base title={SITE_TITLE} description={SITE_DESCRIPTION}>
@@ -42,5 +40,4 @@ const recentPosts = allPosts
 	<p class='read-more'>
 		<HeaderLink href='/blog'>查看全部</HeaderLink>
 	</p>
-
 </Base>
