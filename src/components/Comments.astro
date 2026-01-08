@@ -5,11 +5,11 @@ interface Props {
 	showLinuxDo?: boolean; // 是否显示 LinuxDo 评论，默认为 true（博客文章显示）
 }
 
-const { showLinuxDo = true } = Astro.props;
+const { showLinuxDo = false } = Astro.props; // 默认禁用 LinuxDo 评论
 
 // 获取当前页面的路径
 const currentPath = Astro.url.pathname;
-const embedUrl = `https://zishu.me${currentPath}`;
+const embedUrl = `https://blog.fanxiao.online${currentPath}`;
 ---
 
 <hr class='sep' />
@@ -48,11 +48,15 @@ const embedUrl = `https://zishu.me${currentPath}`;
 				// 清空旧内容
 				twikooEl.innerHTML = '';
 				// 重新初始化
-				twikoo.init({
-					envId: 'https://twikoo.zishu.me/.netlify/functions/twikoo',
-					el: '#twikoo',
-					lang: 'zh-CN',
-				});
+				// TODO: 配置你自己的 Twikoo 服务器
+				// twikoo.init({
+				// 	envId: 'https://your-twikoo-server.com',
+				// 	el: '#twikoo',
+				// 	lang: 'zh-CN',
+				// });
+				
+				// 暂时显示提示信息
+				twikooEl.innerHTML = '<p style="color: #666; text-align: center; padding: 2em;">评论功能正在配置中，敬请期待...</p>';
 			}
 		}
 	}
