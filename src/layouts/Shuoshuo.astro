@@ -10,8 +10,8 @@ type Props = CollectionEntry<'page'>['data'] & {
 const { title } = Astro.props;
 
 // GitHub API 配置
-const GITHUB_REPO = '';
-const ISSUE_NUMBER = '';
+const GITHUB_REPO = 'Fanxaio/fanxiao';
+const ISSUE_NUMBER = '1';
 const API_URL = `https://api.github.com/repos/${GITHUB_REPO}/issues/${ISSUE_NUMBER}/comments`;
 
 // 定义评论类型
