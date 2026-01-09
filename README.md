@@ -2,13 +2,7 @@
 
 > 🚀 基于 Astro 构建的现代化个人博客系统，采用服务器端渲染，性能卓越，SEO 友好。
 
-[子舒的博客](https://zishu.me)
-
-![Preview](https://github.com/user-attachments/assets/8b8f8e0c-25eb-477a-9631-f8797aa200ad)
-
-参考 [Taking regular screenshots of my website](https://alexwlchan.net/2024/scheduled-screenshots/)，我决定每周一通过 GitHub Actions 给我的博客主页截图，然后存放在 `/screenshots` 下，这是一个自动化流程，可以记录我从今日起，未来无数年的博客变化。
-
-截图仓库：https://github.com/anghunk/scheduled-screenshots
+[阿水的博客](https://blog.fanxiao.online/)
 
 ## Command
 
@@ -20,12 +14,12 @@ draft: true
 ---
 ```
 
-| Command                   | Action                                         |
-| :------------------------ | :--------------------------------------------- |
-| `npm install`             | 安装依赖项                                     |
-| `npm run dev`             | 在 `localhost:4321` 启动本地开发服务器         |
-| `npm run build`           | 构建您的生产站点到 `./dist/`                   |
-| `npm run preview`         | 预览本地构建，再部署                           |
+| Command             | Action                                   |
+| :------------------ | :--------------------------------------- |
+| `npm install`     | 安装依赖项                               |
+| `npm run dev`     | 在 `localhost:4321` 启动本地开发服务器 |
+| `npm run build`   | 构建您的生产站点到 `./dist/`           |
+| `npm run preview` | 预览本地构建，再部署                     |
 
 ## 致谢
 
@@ -33,4 +27,4 @@ draft: true
 - [Bear Blog](https://github.com/HermanMartinus/bearblog/) - 设计灵感
 - [Twikoo](https://twikoo.js.org/) - 评论系统
 
-本仓库/博客基于 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hans) 协议开源。
+本仓库/博客基于子舒的博客修改。
