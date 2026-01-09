@@ -48,15 +48,11 @@ const embedUrl = `https://blog.fanxiao.online${currentPath}`;
 				// 清空旧内容
 				twikooEl.innerHTML = '';
 				// 重新初始化
-				// TODO: 配置你自己的 Twikoo 服务器
-				// twikoo.init({
-				// 	envId: 'https://your-twikoo-server.com',
-				// 	el: '#twikoo',
-				// 	lang: 'zh-CN',
-				// });
-				
-				// 暂时显示提示信息
-				twikooEl.innerHTML = '<p style="color: #666; text-align: center; padding: 2em;">评论功能正在配置中，敬请期待...</p>';
+				twikoo.init({
+					envId: 'https://twikoo-blog-phi.vercel.app',
+					el: '#twikoo',
+					lang: 'zh-CN',
+				});
 			}
 		}
 	}
