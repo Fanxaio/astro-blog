@@ -30,29 +30,31 @@ interface GitHubComment {
 let comments: GitHubComment[] = [];
 let error: string | null = null;
 
-try {
-	const response = await fetch(API_URL, {
-		headers: {
-			Accept: 'application/vnd.github.v3+json',
-		},
-	});
+if (GITHUB_REPO && ISSUE_NUMBER) {
+	try {
+		const response = await fetch(API_URL, {
+			headers: {
+				Accept: 'application/vnd.github.v3+json',
+			},
+		});
 
-	if (!response.ok) {
-		throw new Error(`GitHub API 错误: ${response.status} ${response.statusText}`);
+		if (!response.ok) {
+			throw new Error(`GitHub API 错误: ${response.status} ${response.statusText}`);
+		}
+
+		comments = await response.json();
+		// 反转顺序，最新的在前
+		comments.reverse();
+
+		// 配置 marked
+		marked.setOptions({
+			breaks: true, // 换行符自动变成 <br>
+			gfm: true, // GitHub 风格 Markdown
+		});
+	} catch (err) {
+		error = err instanceof Error ? err.message : '加载失败';
+		console.error('获取说说失败:', err);
 	}
-
-	comments = await response.json();
-	// 反转顺序，最新的在前
-	comments.reverse();
-
-	// 配置 marked
-	marked.setOptions({
-		breaks: true, // 换行符自动变成 <br>
-		gfm: true, // GitHub 风格 Markdown
-	});
-} catch (err) {
-	error = err instanceof Error ? err.message : '加载失败';
-	console.error('获取说说失败:', err);
 }
 
 // 格式化日期
@@ -76,7 +78,11 @@ function formatDate(dateString: string): string {
 		<div id='shuoshuo'>
 			<ul>
 				{
-					error ? (
+					!GITHUB_REPO ? (
+						<li class='empty'>
+							尚未配置碎碎念数据源。请在 <code>src/layouts/Shuoshuo.astro</code> 中配置你的 GitHub 仓库信息。
+						</li>
+					) : error ? (
 						<li class='error'>加载失败：{error}</li>
 					) : comments.length === 0 ? (
 						<li class='empty'>暂无说说</li>

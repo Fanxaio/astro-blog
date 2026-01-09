@@ -4,6 +4,8 @@
 
 [阿水的博客](https://blog.fanxiao.online/)
 
+![1767933192334](image/README/1767933192334.png)
+
 ## Command
 
 启用草稿，在 frontmatter 设置：

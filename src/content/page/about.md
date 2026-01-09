@@ -4,8 +4,7 @@ title: 关于我
 ---
 ### 1. Hello ~
 
-
-如果你想与我交流，欢迎发送电子邮件至 `klkl937058311@gmail.com`，或者在文章评论区留下你的足迹。
+如果你想与我交流，欢迎发送电子邮件至hi@fanxiao.online，或者在文章评论区留下你的足迹。
 
 一个热爱生活的后端开发工程师，喜欢写点开源程序 [GitHub](https://github.com/Fanxaio/)。
 
