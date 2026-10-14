@@ -24,6 +24,9 @@ const blog = defineCollection({
 			categories: z.array(z.string()).optional(),
 			tags: z.array(z.string()).optional(),
 			draft: z.boolean().optional().default(false),
+			showTOC: z.boolean().optional(),
+			tocMinLevel: z.number().int().min(1).max(6).optional(),
+			tocMaxLevel: z.number().int().min(1).max(6).optional(),
 		}),
 });
 
@@ -62,6 +65,9 @@ const weekly = defineCollection({
 			categories: z.array(z.string()).optional(),
 			tags: z.array(z.string()).optional(),
 			draft: z.boolean().optional().default(false),
+			showTOC: z.boolean().optional(),
+			tocMinLevel: z.number().int().min(1).max(6).optional(),
+			tocMaxLevel: z.number().int().min(1).max(6).optional(),
 		}),
 });
 
